@@ -407,12 +407,13 @@ export async function getSharedNotes() {
   const { data, error } = await sb.from('notes')
     .select('*')
     .eq('pair_id', ctx.pairId)
+    .not('content', 'like', '[ALBUM]:%')
+    .not('content', 'like', '[DAYS_MATTER]:%')
     .order('created_at', { ascending: false });
 
   if (error || !data) return [];
   
   return data
-    .filter(n => !n.content.startsWith('[ALBUM]:') && !n.content.startsWith('[DAYS_MATTER]:'))
     .map(n => ({
       id: n.id,
       content: n.content,
