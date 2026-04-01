@@ -3,3 +3,9 @@ node_modules
 .vercel_cli
 .env*.local
 dist/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
